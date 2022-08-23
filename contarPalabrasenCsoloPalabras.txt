@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+     char texto[100];
+     int i, contPalabras = 1;
+     printf("Ingrese un texto: ");
+     fgets(texto, 100, stdin);
+     for(i = 0; i < strlen(texto); i++)
+          if(texto[i] == ' ' && i > 0 && texto[i - 1] != ' ')
+               contPalabras++;
+     printf("Cantidad de palabras en el texto: %d\n", contPalabras);
+     system("pause");
+     return 0;
+}
