@@ -4,8 +4,8 @@ close all   %cierra todo
 clear all %limpia todo
 
 warning off all 
-s1='Yes'
-s2='Yes'
+s1='Yes';
+s2='Yes';
 c1=[15 65 45 48 27; 45 90 48 45 76];
 c2=[60 50 70 65 38; -58 -25 -38 -33 -45];
 c3=[-30 -35 -45 -30 -40; 50 70 55 67 70];
@@ -13,10 +13,12 @@ c4=[-50 -36 -60 -28 -30; -20 30 -10 20 -40];
 c5=[10 23 21 22 24; 17 0 17 24 33];
 c6=[-10 -5 -15 10 0; -85 -94 -65 -80 -69];
 while strcmp(s1,s2)
+ 
+f1 = figure(1);
 
 
 
-disp('welcome to pattern recognition')
+disp('welcome to pattern recognition');
 
 %diseño de un clasificador de distancia euclideana
 
@@ -26,14 +28,23 @@ disp('welcome to pattern recognition')
 vx=input('dame la coord del vector en x=');
 vy=input('dame la coord del vector en y=');
 vector=[vx;vy];
-mediaTotal = mean((cat(2,c1,c2,c3,c4,c5,c6)),2)
+mediaTotal = mean((cat(2,c1,c2,c3,c4,c5,c6)),2);
+distancia_con_vector=norm(mediaTotal-vector);
 
-if 1000 < vector(1,1) || 1000 < vector (2,1)
-    fprintf("Demasiado lejos el valor\n");
+if distancia_con_vector>200 || distancia_con_vector<-200
+    
     ct=[mediaTotal,vector];
-    f2=figure(2);
-    plot(ct(1,:),ct(2,:),'ro-','MarkerFaceColor','r','MarkerSize', 10, 'Marker','hexagram','MarkerEdgeColor','k')
+    figure(1)
+    grid on
+    hold on
+    plot(c2(1,:),c2(2,:),'go','MarkerFaceColor','g','MarkerSize', 10,'Marker','<');
+    plot(c3(1,:),c3(2,:),'bo','MarkerFaceColor','b','MarkerSize', 10,'Marker','>');
+    plot(c4(1,:),c4(2,:),'co','MarkerFaceColor','c','MarkerSize', 10,'Marker','pentagram');
+    plot(c5(1,:),c5(2,:),'mo','MarkerFaceColor','m','MarkerSize', 10,'Marker','diamond');
+    plot(c6(1,:),c6(2,:),'yo','MarkerFaceColor','y','MarkerSize', 10,'Marker','^');
+    plot(ct(1,:),ct(2,:),'ro-','MarkerFaceColor','r','MarkerSize', 10, 'Marker','hexagram','MarkerEdgeColor','k');
     pause(0.5);
+    f = msgbox("Demasiado lejos el valor","Warn","warn");
 else
 %GRAFICANDO LAS CLASES
 
@@ -47,6 +58,8 @@ media3=mean(c3,2);
 media4=mean(c4,2);
 media5=mean(c5,2);
 media6=mean(c6,2);
+
+
 
 c_1=[media1,vector];
 c_2=[media2,vector];
@@ -66,12 +79,14 @@ distancia5=norm(media5-vector);
 distancia6=norm(media6-vector);
 
 
-dist_total=[distancia1,distancia2, distancia3,distancia4,distancia5,distancia6];
-minima=min(min(dist_total))
-encuentra=find(dist_total==minima)
-fprintf('el vector desconocido pertenece a la clase %d\n',encuentra)
+    dist_total=[distancia1,distancia2, distancia3,distancia4,distancia5,distancia6];
+    minima=min(min(dist_total));
+    encuentra=find(dist_total==minima);
+    message = sprintf("\tEl vector desconocido pertenece a la clase  %d", encuentra);
+    f = msgbox(message,"Clase");
+    %fprintf('el vector desconocido pertenece a la clase %d\n',encuentra);
 
-    f1 = figure(1);
+    f1;
     plot(c1(1,:),c1(2,:),'ro','MarkerFaceColor','r','MarkerSize', 10, 'Marker','hexagram')
     grid on
     hold on
@@ -104,9 +119,9 @@ fprintf('el vector desconocido pertenece a la clase %d\n',encuentra)
         c6 = cat(2,c6,vector);
     end
 end
-pause(2);
+pause(1);
 s2=input('Deseas volver a buscar un vector? [Yes/No]','s');
-
 clear vector %limpia todo
-%close(f1)
+close(figure(1));
+
 end
