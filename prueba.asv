@@ -15,22 +15,21 @@ c6=[-10 -5 -15 10 0; -85 -94 -65 -80 -69];
 
 
 %disp('welcome to pattern recognition');
-    choice= menu('¿Que programa deseas correr?','Practica 1','Practica 2');
+ choice= menu('¿Que programa deseas correr?','Practica 1','Practica 2');
     
+    prompt = {'Ingreasa la coordenada X','Ingresa la coordenada Y'};
+    
+    dlg_tilte = 'Coordenadas';
+    
+    num_lines  = 1;
+    
+    def = {'',''};
     
 
-while choice~=1
+while choice!='Practica 1'
     msgbox("Con calma vaquero","Warn","warn");
-    choice= menu('¿Que programa deseas correr?','Practica 1','Practica 2');
+   
 end
-
-prompt = {'Ingreasa la coordenada X','Ingresa la coordenada Y'};
-
-dlg_tilte = 'Coordenadas';
-
-num_lines  = 1;
-
-def = {'',''};
     
 while strcmp(s1,s2)
 close all   %cierra todo
@@ -105,7 +104,7 @@ distancia6=norm(media6-vector);
     minima=min(min(dist_total));
     encuentra=find(dist_total==minima);
     message = sprintf("\tEl vector desconocido pertenece a la clase  %d", encuentra);
-    
+    f = msgbox(message,"Clase");
     %fprintf('el vector desconocido pertenece a la clase %d\n',encuentra);
 
     f1;
@@ -140,9 +139,9 @@ distancia6=norm(media6-vector);
     elseif encuentra==6
         c6 = cat(2,c6,vector);
     end
-    waitfor(msgbox(message,"Clase"));
 end
 
+pause(5);
 s2 = questdlg('¿Deseas buscar otro vector?', ...
 	'Yes', ...
 	'No');
