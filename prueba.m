@@ -24,6 +24,8 @@ while choice~=1
     choice= menu('¿Que programa deseas correr?','Practica 1','Practica 2');
 end
 
+
+
 prompt = {'Ingreasa la coordenada X','Ingresa la coordenada Y'};
 
 dlg_tilte = 'Coordenadas';
